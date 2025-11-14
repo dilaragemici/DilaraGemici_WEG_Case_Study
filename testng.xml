@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Enuygun Test Suite" parallel="false" thread-count="1" verbose="2">
+    <test name="Case 1 - Temel Uçuş Arama ve Zaman Filtresi">
+        <classes>
+            <class name="org.example.tests.DortyuzCinis">
+                <methods>
+                    <include name="temelUcusAramaVeSaatFiltresi"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Case 2 - Türk Hava Yolları Fiyat Sıralanması">
+        <classes>
+            <class name="org.example.tests.IkiArmak">
+                <methods>
+                    <include name="turkHavaYolluFiyatSiralamasi"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Case 3 - Kritik Yol Testi">
+        <classes>
+            <class name="org.example.tests.UcunuSeç">
+                <methods>
+                    <include name="kritikYoluTestet"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Case 4 - Veri Çıkarma ve Analiz">
+        <classes>
+            <class name="org.example.tests.VeriCikarimaVeAnaliz">
+                <methods>
+                    <include name="veriCikarimaVeAnaiz"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
+
