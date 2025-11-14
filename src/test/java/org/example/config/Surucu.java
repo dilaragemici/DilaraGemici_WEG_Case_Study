@@ -39,7 +39,9 @@ public class Surucu {
             WebDriverManager.firefoxdriver().setup();
             FirefoxOptions options = new FirefoxOptions();
             if (headless) {
-                options.setHeadless(true);
+                // Selenium'in bazı sürümlerinde FirefoxOptions#setHeadless(boolean) mevcut olmayabilir.
+                // Bu yüzden doğrudan headless argümanı ekliyoruz, Chrome tarafında kullandığımız formata benzetiyoruz.
+                options.addArguments("--headless=new");
             }
             surucu = new FirefoxDriver(options);
         } else {

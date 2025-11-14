@@ -157,7 +157,7 @@ public class VeriCikarimaVeAnaliz {
             // ADIM 9: Saat Dilimine Göre Isı Haritası
             TestRaporlayici.logYaz(testAdi, "ADIM 8: Saat dilimine göre ısı haritası oluşturuluyor...");
             // Isı haritası için gerekli verileri hazırla
-            Map<String, Double> saatDilimiFiyatlari = versiIsleyici.saatDilimineGoreFiyatlariHesapla();
+            Map<String, Double> saatDilimiFiyatlari = versiIsleyici.saatDilimineSaatBazindaOrtalamaFiyat();
 
             // Isı haritasını oluştur
             // (Bu adım için bir grafik kütüphanesi kullanılması gerekebilir, burada sadece örnek bir çıktı veriyoruz)

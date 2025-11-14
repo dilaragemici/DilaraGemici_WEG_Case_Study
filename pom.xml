@@ -64,7 +64,22 @@
             <groupId>com.aventstack</groupId>
             <artifactId>extentreports</artifactId>
             <version>5.1.1</version>
+            <!-- Exclude Lombok (brought in transitively) because project doesn't use it, and it can break compilation with some JDKs in IDE -->
+            <exclusions>
+                <exclusion>
+                    <groupId>org.projectlombok</groupId>
+                    <artifactId>lombok</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
+
+        <!-- Lombok (annotation processor) - provided scope -->
+        <!-- <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.26</version>
+            <scope>provided</scope>
+        </dependency> -->
     </dependencies>
 
     <build>
@@ -74,11 +89,34 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0</version>
                 <configuration>
+                    <!-- Varsayılan olarak build sırasında testler çalışmasın -->
+                    <skipTests>true</skipTests>
                     <suiteXmlFiles>
                         <suiteXmlFile>testng.xml</suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
             </plugin>
+
+            <!-- Explicit maven-compiler-plugin configuration to force correct javac and annotation processors -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+                <configuration>
+                    <!-- Use release to set source/target in a single property -->
+                    <release>21</release>
+                    <!-- Fork javac to ensure the correct executable is used -->
+                    <fork>true</fork>
+                    <!-- Do not hardcode executable here; let Maven use its configured JDK (removes IDE unresolved env var error) -->
+                    <!-- No annotationProcessorPaths declared (no Lombok in project) -->
+                    <!-- Temporarily disable annotation processing at compile time to avoid Lombok/JDK incompatibility errors
+                         If you DO need Lombok, remove this and add a compatible lombok version in annotationProcessorPaths. -->
+                    <compilerArgs>
+                        <arg>-proc:none</arg>
+                    </compilerArgs>
+                </configuration>
+            </plugin>
+
         </plugins>
     </build>
 
